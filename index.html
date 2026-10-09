@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Daily Work Report – Creative IT</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap">
+<style>
+:root{--bg:#f4f6fa;--card:#fff;--ink:#14213d;--mute:#667089;--line:#e2e6ee;--c1:#0f8b8d;--c2:#d9822b;--pri:#3a4de0;--danger:#c0392b;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1524;--card:#18203a;--ink:#eef1fa;--mute:#98a2c0;--line:#2a3558;--pri:#7c8cff;--c1:#34c5c7;--c2:#f0a252}}
+:root[data-theme="dark"]{--bg:#0f1524;--card:#18203a;--ink:#eef1fa;--mute:#98a2c0;--line:#2a3558;--pri:#7c8cff;--c1:#34c5c7;--c2:#f0a252}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 "Plus Jakarta Sans",system-ui,Segoe UI,Arial,sans-serif}
+header{padding:28px 20px 8px;max-width:1100px;margin:auto;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:flex-end}
+h1{margin:0;font-size:28px;font-weight:800;letter-spacing:-.5px}
+header p{margin:2px 0 0;color:var(--mute)}
+main{max-width:1100px;margin:auto;padding:12px 20px 60px;display:grid;grid-template-columns:380px 1fr;gap:20px;align-items:start}
+@media(max-width:860px){main{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+h2{font-size:17px;margin:0 0 12px}
+label{display:block;font-size:13px;font-weight:700;margin:10px 0 4px}
+input,select,textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:9px;background:var(--bg);color:var(--ink);font:inherit}
+input:focus,select:focus,textarea:focus,button:focus-visible{outline:2px solid var(--pri);outline-offset:1px}
+textarea{min-height:76px;resize:vertical}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.campus{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.campus input{display:none}
+.campus label{margin:0;border:2px solid var(--line);border-radius:10px;padding:10px;text-align:center;cursor:pointer;font-weight:700}
+#c1:checked+label{border-color:var(--c1);background:color-mix(in srgb,var(--c1) 14%,transparent);color:var(--c1)}
+#c2:checked+label{border-color:var(--c2);background:color-mix(in srgb,var(--c2) 16%,transparent);color:var(--c2)}
+button{font:inherit;font-weight:700;border:0;border-radius:9px;padding:10px 16px;cursor:pointer;background:var(--pri);color:#fff}
+button.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+button.sm{padding:5px 10px;font-size:13px}
+.actions{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.bar input,.bar select{width:auto;flex:1 1 140px}
+.day{margin-bottom:18px}
+.day h3{margin:0 0 8px;font-size:15px;display:flex;justify-content:space-between;color:var(--mute);font-weight:700}
+.item{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--c1);border-radius:12px;padding:12px 14px;margin-bottom:8px}
+.item.k2{border-left-color:var(--c2)}
+.item h4{margin:0;font-size:16px}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}
+.tag{font-size:12px;font-weight:700;border-radius:20px;padding:2px 10px;background:var(--bg);border:1px solid var(--line)}
+.item p{margin:4px 0;white-space:pre-wrap}
+.note{background:color-mix(in srgb,var(--c2) 14%,transparent);border-radius:8px;padding:6px 10px;font-size:13px}
+.empty{text-align:center;color:var(--mute);padding:40px 10px}
+#report{display:none}
+@media print{
+ body{background:#fff;color:#000}
+ header,main{display:none!important}
+ #report{display:block;padding:0}
+ #report table{width:100%;border-collapse:collapse;font-size:12px}
+ #report th,#report td{border:1px solid #999;padding:6px;text-align:left;vertical-align:top}
+ #report th{background:#e9ecf5}
+ #report h1{font-size:22px}
+ tr{break-inside:avoid}
+ @page{margin:14mm}
+}
+</style>
+</head>
+<body>
+<header>
+ <div><h1>Daily Work Report</h1><p>Creative IT · IT Department · Dhanmondi, Dhaka</p></div>
+ <button class="ghost sm" onclick="toggleTheme()">Light / Dark</button>
+</header>
+
+<main>
+<section class="card">
+ <h2 id="formTitle">Add work</h2>
+ <label for="date">Date</label><input type="date" id="date">
+ <label>Campus</label>
+ <div class="campus">
+  <input type="radio" name="campus" id="c1" value="1" checked><label for="c1">Campus 1</label>
+  <input type="radio" name="campus" id="c2" value="2"><label for="c2">Campus 2</label>
+ </div>
+ <label for="work">Work name</label><input id="work" placeholder="e.g. Replaced switch, Fixed printer">
+ <div class="row">
+  <div><label for="dept">Department</label><input id="dept" list="depts" placeholder="e.g. Accounts"></div>
+  <div><label for="room">Room</label><input id="room" list="rooms" placeholder="e.g. Lab 3"></div>
+ </div>
+ <datalist id="depts"></datalist><datalist id="rooms"></datalist>
+ <label for="details">Work details</label><textarea id="details" placeholder="What did you do?"></textarea>
+ <label for="note">Note (optional)</label><textarea id="note" placeholder="Follow-up, parts needed, reminders…"></textarea>
+ <div class="actions">
+  <button onclick="save()" id="saveBtn">Save work</button>
+  <button class="ghost" onclick="resetForm()">Clear</button>
+ </div>
+ <p style="color:var(--mute);font-size:13px;margin:10px 0 0">You can add many works on the same day. The date and campus stay selected after saving.</p>
+</section>
+
+<section>
+ <div class="card" style="margin-bottom:16px">
+  <h2>Export report</h2>
+  <div class="bar">
+   <select id="mode" onchange="syncMode()"><option value="day">Daily report</option><option value="month">Monthly report</option></select>
+   <input type="date" id="rDay"><input type="month" id="rMonth" style="display:none">
+   <button onclick="printReport()">Print / Save as PDF</button>
+  </div>
+  <p style="color:var(--mute);font-size:13px;margin:0">In the print window, choose “Save as PDF” as the destination.</p>
+ </div>
+
+ <div class="bar">
+  <input id="search" placeholder="Search work, department, room…" oninput="render()">
+  <select id="fCampus" onchange="render()"><option value="">Both campuses</option><option value="1">Campus 1</option><option value="2">Campus 2</option></select>
+  <input type="month" id="fMonth" onchange="render()" title="Filter by month">
+ </div>
+ <div id="list"></div>
+ <div class="actions"><button class="ghost sm" onclick="backup()">Download backup</button>
+  <button class="ghost sm" onclick="document.getElementById('imp').click()">Restore backup</button>
+  <input type="file" id="imp" accept=".json" style="display:none" onchange="restore(event)"></div>
+</section>
+</main>
+
+<div id="report"></div>
+
+<script>
+const KEY='creativeit-daily-reports';
+let items=[],editId=null;
+const $=id=>document.getElementById(id);
+function load(){try{items=JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){items=[]}}
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(items))}catch(e){alert('Could not save in this browser. Use Download backup.')}}
+const today=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
+const esc=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt=d=>new Date(d+'T00:00').toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+const campusVal=()=>document.querySelector('input[name=campus]:checked').value;
+
+function save(){
+ const w=$('work').value.trim();
+ if(!$('date').value||!w){alert('Please add a date and a work name.');return}
+ const rec={id:editId||Date.now().toString(36),date:$('date').value,campus:campusVal(),work:w,dept:$('dept').value.trim(),room:$('room').value.trim(),details:$('details').value.trim(),note:$('note').value.trim()};
+ if(editId){items=items.map(i=>i.id===editId?rec:i)}else items.push(rec);
+ persist();editId=null;
+ ['work','dept','room','details','note'].forEach(k=>$(k).value='');
+ $('formTitle').textContent='Add work';$('saveBtn').textContent='Save work';
+ render();
+}
+function resetForm(){editId=null;['work','dept','room','details','note'].forEach(k=>$(k).value='');$('formTitle').textContent='Add work';$('saveBtn').textContent='Save work'}
+function edit(id){const i=items.find(x=>x.id===id);editId=id;
+ $('date').value=i.date;$('c'+i.campus).checked=true;$('work').value=i.work;$('dept').value=i.dept;$('room').value=i.room;$('details').value=i.details;$('note').value=i.note;
+ $('formTitle').textContent='Edit work';$('saveBtn').textContent='Update work';window.scrollTo({top:0,behavior:'smooth'})}
+function del(id){if(confirm('Delete this work entry?')){items=items.filter(i=>i.id!==id);persist();render()}}
+
+function render(){
+ const q=$('search').value.toLowerCase(),fc=$('fCampus').value,fm=$('fMonth').value;
+ const rows=items.filter(i=>(!fc||i.campus===fc)&&(!fm||i.date.startsWith(fm))&&(!q||[i.work,i.dept,i.room,i.details,i.note].join(' ').toLowerCase().includes(q)))
+  .sort((a,b)=>b.date.localeCompare(a.date)||b.id.localeCompare(a.id));
+ if(!rows.length){$('list').innerHTML='<div class="card empty">No work added yet. Fill the form and press “Save work”.</div>'}
+ else{const g={};rows.forEach(r=>(g[r.date]=g[r.date]||[]).push(r));
+  $('list').innerHTML=Object.keys(g).map(d=>`<div class="day"><h3><span>${fmt(d)}</span><span>${g[d].length} work${g[d].length>1?'s':''}</span></h3>`+
+   g[d].map(r=>`<div class="item k${r.campus}"><h4>${esc(r.work)}</h4>
+   <div class="tags"><span class="tag">Campus ${r.campus}</span>${r.dept?`<span class="tag">${esc(r.dept)}</span>`:''}${r.room?`<span class="tag">Room: ${esc(r.room)}</span>`:''}</div>
+   ${r.details?`<p>${esc(r.details)}</p>`:''}${r.note?`<div class="note"><b>Note:</b> ${esc(r.note)}</div>`:''}
+   <div class="actions" style="margin-top:8px"><button class="ghost sm" onclick="edit('${r.id}')">Edit</button><button class="ghost sm" onclick="del('${r.id}')" style="color:var(--danger)">Delete</button></div></div>`).join('')+'</div>').join('')}
+ $('depts').innerHTML=[...new Set(items.map(i=>i.dept).filter(Boolean))].map(v=>`<option value="${esc(v)}">`).join('');
+ $('rooms').innerHTML=[...new Set(items.map(i=>i.room).filter(Boolean))].map(v=>`<option value="${esc(v)}">`).join('');
+}
+
+function syncMode(){const m=$('mode').value==='month';$('rDay').style.display=m?'none':'';$('rMonth').style.display=m?'':'none'}
+function printReport(){
+ const m=$('mode').value==='month',key=m?$('rMonth').value:$('rDay').value;
+ if(!key){alert('Choose a '+(m?'month':'date')+' first.');return}
+ const rows=items.filter(i=>i.date.startsWith(key)).sort((a,b)=>a.date.localeCompare(b.date)||a.campus.localeCompare(b.campus));
+ if(!rows.length){alert('No work found for that '+(m?'month':'day')+'.');return}
+ const title=m?new Date(key+'-01T00:00').toLocaleDateString('en-GB',{month:'long',year:'numeric'}):fmt(key);
+ $('report').innerHTML=`<h1>Creative IT – ${m?'Monthly':'Daily'} Work Report</h1>
+ <p><b>${title}</b> · IT Department · Dhanmondi, Dhaka · Total works: ${rows.length}</p>
+ <table><thead><tr><th>#</th><th>Date</th><th>Campus</th><th>Work</th><th>Department</th><th>Room</th><th>Details</th><th>Note</th></tr></thead><tbody>`+
+ rows.map((r,n)=>`<tr><td>${n+1}</td><td>${r.date.split('-').reverse().join('/')}</td><td>${r.campus}</td><td>${esc(r.work)}</td><td>${esc(r.dept)}</td><td>${esc(r.room)}</td><td>${esc(r.details)}</td><td>${esc(r.note)}</td></tr>`).join('')+'</tbody></table>';
+ document.title='Work Report '+key;window.print();document.title='Daily Work Report – Creative IT';
+}
+
+function backup(){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(items,null,1)],{type:'application/json'}));a.download='work-report-backup.json';a.click()}
+function restore(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);if(Array.isArray(d)){items=d;persist();render()}}catch(x){alert('That file is not a valid backup.')}};r.readAsText(f)}
+function toggleTheme(){const r=document.documentElement;const dark=r.dataset.theme?r.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches;r.dataset.theme=dark?'light':'dark'}
+
+load();$('date').value=today();$('rDay').value=today();$('rMonth').value=today().slice(0,7);render();
+</script>
+</body>
+</html>
